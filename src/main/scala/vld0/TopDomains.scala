@@ -1,10 +1,10 @@
 package vld0
 
-import com.vld0.spark.PageSize
+import com.creanga.sparktest.LazyLogging
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.col
 
-object TopDomains {
+object TopDomains extends LazyLogging {
 
   def main(implicit args: Array[String]): Unit = {
     val spark = SparkSession.builder()
@@ -18,11 +18,9 @@ object TopDomains {
 
     //topDomainsDF.show()
 
-    val pageSize = new PageSize
-
     import spark.implicits._
 
-    topDomainsDF.select(col("Root Domain")).map( row => pageSize.call(row.getString(0)) ).show();
+    topDomainsDF.select(col("Root Domain")).map( row => PageSize.call(row.getString(0)) ).show();
 
     //TODO cum fac aici?
     //topDomainsDF.select(col("Root Domain"))
