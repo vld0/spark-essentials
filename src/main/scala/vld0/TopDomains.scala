@@ -20,8 +20,13 @@ object TopDomains {
 
     val pageSize = new PageSize
 
-    topDomainsDF.select(col("Root Domain"))
-      .withColumn("Size", pageSize.call( col("Root Domain")) ).show();
+    import spark.implicits._
+
+    topDomainsDF.select(col("Root Domain")).map( row => pageSize.call(row.getString(0)) ).show();
+
+    //TODO cum fac aici?
+    //topDomainsDF.select(col("Root Domain"))
+      //.withColumn("Size", pageSize.call( col("Root Domain")) ).show();
 
 
 

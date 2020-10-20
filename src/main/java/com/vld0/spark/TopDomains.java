@@ -29,9 +29,10 @@ public class TopDomains {
 
         //topDomainsDF.select("Root Domain").as(Encoders.STRING()).map(pageSize, Encoders.LONG()).show();
 
-        topDomainsDF.select("Root Domain").as(Encoders.STRING())
-                .withColumn("Size", pageSize.call( topDomainsDF.col("Root Domain") ) )
-                .show();
+        //TODO ?!
+        //topDomainsDF.select("Root Domain").as(Encoders.STRING())
+          //      .withColumn("Size", pageSize.call( topDomainsDF.col("Root Domain") ) )
+            //    .show();
 
 
 
