@@ -1,15 +1,8 @@
 package vld0
 
-import java.util
-
 import com.vld0.spark.PageSize
-import org.apache.spark.{SparkEnv, TaskContext}
-import org.apache.spark.api.java.function.ForeachPartitionFunction
-import org.apache.spark.sql.functions.{col, lit, udf}
-import org.apache.spark.sql.{Row, SparkSession}
-
-import scala.reflect.internal.util.TableDef.Column
-import scala.util.Random
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions.col
 
 object TopDomains {
 
@@ -26,10 +19,9 @@ object TopDomains {
     //topDomainsDF.show()
 
     val pageSize = new PageSize
-    val myJavaUdf = udf( pageSize.call _ )
 
     topDomainsDF.select(col("Root Domain"))
-      .withColumn("Size", myJavaUdf(col("Root Domain")) ).show();
+      .withColumn("Size", pageSize.call( col("Root Domain")) ).show();
 
 
 

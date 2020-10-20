@@ -35,7 +35,7 @@ object Datasets extends App {
                 Horsepower: Option[Long],
                 Weight_in_lbs: Long,
                 Acceleration: Double,
-                Year: Date,
+                Year: String,
                 Origin: String
                 )
 
@@ -56,6 +56,9 @@ object Datasets extends App {
 
   // map, flatMap, fold, reduce, for comprehensions ...
   val carNamesDS = carsDS.map(car => car.Name.toUpperCase())
+
+  carsDS.withColumn("dee", map(car => car.Name.toUpperCase()))
+  carNamesDS.show()
 
   /**
     * Exercises
