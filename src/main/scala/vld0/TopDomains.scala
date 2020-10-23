@@ -15,6 +15,10 @@ object TopDomains extends LazyLogging {
     val topDomainsDF = spark.read.option("header", "true")
       .option("inferSchema", "true")
       .csv("src/main/resources/data/top10Domains.csv")
+      .repartition(3)
+
+
+    println("getNumPartitions="+  topDomainsDF.rdd.getNumPartitions)
 
     //topDomainsDF.show()
 

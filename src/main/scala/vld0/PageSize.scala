@@ -5,6 +5,7 @@ import java.io.IOException
 import com.creanga.sparktest.LazyLogging
 import org.apache.commons.httpclient.methods.GetMethod
 import org.apache.commons.httpclient.{HttpClient, MultiThreadedHttpConnectionManager}
+import org.apache.spark.{SparkEnv, TaskContext}
 
 object PageSize extends LazyLogging {
 
@@ -17,9 +18,14 @@ object PageSize extends LazyLogging {
     get.setFollowRedirects(true)
     try {
 
-      System.out.println("processing url="+url);
+      println(s"Processing url ${url} on ${SparkEnv.get.executorId} for partition ${TaskContext.getPartitionId()}")
 
-      logger.error("processing url");
+      //System.out.println("connectionManager="+connectionManager.toString);
+      //System.out.println("httpClient="+httpClient);
+
+      //System.out.println("processing url="+url);
+
+      logger.info("Processing url {} on {} for partition {}", url, SparkEnv.get.executorId, TaskContext.getPartitionId());
 
 
       httpClient.executeMethod(get)
