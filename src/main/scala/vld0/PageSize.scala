@@ -25,7 +25,7 @@ object PageSize extends LazyLogging {
 
       //System.out.println("processing url="+url);
 
-      logger.info("Processing url {} on {} for partition {}", url, SparkEnv.get.executorId, TaskContext.getPartitionId());
+      logger.info("Processing url {} on {} for partition {}", url, SparkEnv.get.executorId, TaskContext.getPartitionId()+"");
 
 
       httpClient.executeMethod(get)
