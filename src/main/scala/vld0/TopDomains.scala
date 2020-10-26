@@ -4,6 +4,26 @@ import com.creanga.sparktest.LazyLogging
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import org.apache.spark.sql.functions.{col, udf}
 
+
+/**
+  * How to run the Spark application on the Docker cluster
+  *
+  * 1. Start the cluster
+  *   docker-compose up --scale spark-worker=3
+  *
+  * 2. Connect to the master node
+  *   docker exec -it spark-cluster_spark-master_1 bash
+  *
+  * 3. Run the spark-submit command
+  *   /spark/bin/spark-submit \
+  *     --class vld0.TopDomains \
+  *     --master spark://5aba073cb0a0:7077 \
+  *     --deploy-mode client \
+  *     --verbose \
+  *     --supervise \
+  *     spark-essentials.jar /opt/spark-data/top10Domains.csv /opt/spark-data/top10DomainsPageSize
+  */
+
 object TopDomains extends LazyLogging {
 
   def main(implicit args: Array[String]): Unit = {
