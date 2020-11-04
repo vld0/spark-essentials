@@ -29,7 +29,7 @@ object QuestionRockthejvm {
     }*/
 
     val spark = SparkSession.builder()
-      .config("spark.master", "local")
+      //.config("spark.master", "local")
       .appName("Spark Job Anatomy")
       .getOrCreate()
 
